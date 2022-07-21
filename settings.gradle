@@ -1,0 +1,7 @@
+/*
+ * Multi-module project with homework at the Microservice Architecture course.
+ */
+
+rootProject.name = 'otus-microservice-architecture'
+
+include 'lesson_1'
