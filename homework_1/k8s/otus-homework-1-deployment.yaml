@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homework-1-deployment # The resource name
+  namespace: otus
+  labels:
+    app: homework-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: homework-1
+  template:
+    metadata:
+      labels:
+        app: homework-1
+    spec:
+      containers:
+        - image: dmitryprigozhaev/otus-homework-1:v6
+          imagePullPolicy: IfNotPresent
+          name: otus-homework-1 # The container name
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          readinessProbe: # Check pod init
+            httpGet:
+              scheme: HTTP
+              path: /health
+              port: 8000
+              httpHeaders:
+                - name: Custom-Header
+                  value: OTUS
+            initialDelaySeconds: 5 # Timeout before first request
+            periodSeconds: 20      # Survey frequency
+          livenessProbe:           # Check pod status
+            httpGet:
+              scheme: HTTP
+              path: /health
+              port: 8000
+              httpHeaders:
+                - name: Custom-Header
+                  value: OTUS
+            initialDelaySeconds: 5 # Timeout before first request
+            periodSeconds: 20      # Survey frequency
