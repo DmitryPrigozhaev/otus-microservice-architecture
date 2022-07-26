@@ -4,4 +4,4 @@
 
 rootProject.name = 'otus-microservice-architecture'
 
-include 'lesson_1'
+include 'homework_1'
