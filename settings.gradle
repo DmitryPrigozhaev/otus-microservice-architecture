@@ -5,3 +5,5 @@
 rootProject.name = 'otus-microservice-architecture'
 
 include 'homework_1'
+include 'homework_2'
+

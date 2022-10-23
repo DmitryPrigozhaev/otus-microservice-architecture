@@ -34,3 +34,6 @@ bin/
 
 # Ignore Gradle build output directory
 build
+
+# Ignore custom folder (custom properties for example)
+custom
