@@ -76,3 +76,62 @@ Routing rules:
 1. The request to the root `/` does not change;
 2. Request prefixed with `/otusapp/dmitry/*` is rewritten in favor of `/*`;
 3. All other requests return 404.
+
+## Manual
+
+1. Download project to a pre-created directory:
+```shell
+git clone https://github.com/DmitryPrigozhaev/otus-microservice-architecture.git .
+```
+2. Start kubernetes in Docker with `minikube`:
+```shell
+minikube start --driver=docker
+```
+3. Install the [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/deploy/):
+```shell
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
+```
+4. Create a new namespace via `kubectl`:
+```shell
+kubectl create namespace otus
+```
+5. Apply all homework manifests via `kubectl`:
+```shell
+kubectl apply -f /homework_1/
+```
+6. Deal with it!
+```shell
+curl arch.homework/health
+```
+
+---
+
+# Bonus
+
+## Useful tricks
+
+Automatic input completion for `kubectl`:
+
+#### BASH
+
+```shell
+source <(kubectl completion bash) # set up autocompletion in the current bash session, the bash-completion package must first be installed.
+echo "source <(kubectl completion bash)" >> ~/.bashrc # add autocomplete permanently to the bash shell.
+```
+
+#### ZSH
+
+```shell
+source <(kubectl completion zsh) # set up autocompletion in the current zsh session
+echo "[[ $commands[kubectl] ]] && source <(kubectl completion zsh)" >> ~/.zshrc # add autocomplete permanently to the zsh shell.
+```
+
+See more: https://kubernetes.io/ru/docs/reference/kubectl/cheatsheet/
+
+## Monitoring
+
+Use `minikube` dashboards for system monitoring:
+
+```shell
+minikube dashboard & disown
+```
