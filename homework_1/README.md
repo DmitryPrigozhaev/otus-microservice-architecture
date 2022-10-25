@@ -79,44 +79,45 @@ Routing rules:
 
 ## Manual
 
-1. Install the `minikube` in any way possible. Linux Mint example:
-```shell
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
-```
+1. Install the `minikube` in any way possible (if required). Linux Mint example:
+   ```shell
+   curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+   sudo install minikube-linux-amd64 /usr/local/bin/minikube
+   ```
 2. Clear `minikube` to avoid collisions (if required):
-```shell
-minikube delete
-```
+   ```shell
+   minikube delete --all --purge 
+   ```
 3. Start kubernetes in Docker with `minikube`:
-```shell
-minikube start --driver=docker
-```
-4. Configure `minikube`:
-```shell
-minikube addons enable ingress
-minikube tunnel & disown
-```
-5. Download project to a pre-created directory:
-```shell
-git clone https://github.com/DmitryPrigozhaev/otus-microservice-architecture.git .
-```
-6. Install the [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/deploy/):
-```shell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
-```
+   ```shell
+   minikube start --driver=docker
+   ```
+4. Install the [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/deploy/):
+   ```shell
+   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
+   ```
+5. Configure `minikube`:
+   ```shell
+   minikube addons enable ingress
+   minikube addons enable ingress-dns
+   minikube tunnel & disown
+   ```
+6. Download project to a pre-created directory:
+   ```shell
+   git clone https://github.com/DmitryPrigozhaev/otus-microservice-architecture.git .
+   ```
 7. Create a new namespace via `kubectl`:
-```shell
-kubectl create namespace otus
-```
+   ```shell
+   kubectl create namespace otus
+   ```
 8. Apply all homework manifests via `kubectl`:
-```shell
-kubectl apply -f /homework_1/
-```
+   ```shell
+   kubectl apply -f /homework_1/
+   ```
 9. Deal with it!
-```shell
-curl arch.homework/health
-```
+   ```shell
+   curl arch.homework/health
+   ```
 
 ---
 
