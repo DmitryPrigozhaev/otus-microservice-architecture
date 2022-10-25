@@ -150,3 +150,11 @@ Use `minikube` dashboards for system monitoring:
 ```shell
 minikube dashboard & disown
 ```
+
+## Context
+
+To switch the context, run the command:
+
+```shell
+kubectl config use-context minikube
+```
