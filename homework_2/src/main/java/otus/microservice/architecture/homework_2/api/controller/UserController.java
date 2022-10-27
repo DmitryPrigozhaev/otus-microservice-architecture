@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import otus.microservice.architecture.homework_2.domain.dto.User;
 import otus.microservice.architecture.homework_2.service.UserService;
 
+import java.util.Collection;
+
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 /**
@@ -52,6 +54,16 @@ public class UserController {
   @GetMapping("/user/{userId}")
   public User read(@PathVariable Long userId) {
     return userService.get(userId);
+  }
+
+  /**
+   * The endpoint is responsible for retrieving all users data.
+   *
+   * @return the {@link User} if found
+   */
+  @GetMapping("/user")
+  public Collection<User> readAll() {
+    return userService.getAll();
   }
 
   /**

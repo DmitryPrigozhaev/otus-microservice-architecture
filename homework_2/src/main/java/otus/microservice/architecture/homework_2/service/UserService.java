@@ -10,6 +10,9 @@ import otus.microservice.architecture.homework_2.domain.model.UserDomain;
 import otus.microservice.architecture.homework_2.domain.repository.UserRepository;
 import otus.microservice.architecture.homework_2.exception.UserNotFoundException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * The simplest service is responsible for user management.
  *
@@ -51,6 +54,13 @@ public class UserService {
     log.debug("Trying to get user by ID: {}", id);
 
     return UserMapper.map(userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id)));
+  }
+
+  @Transactional(readOnly = true)
+  public List<User> getAll() {
+    log.debug("Trying to get all users");
+
+    return userRepository.findAll().stream().map(UserMapper::map).collect(Collectors.toList());
   }
 
   /**
