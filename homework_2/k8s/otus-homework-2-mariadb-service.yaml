@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-service
+  namespace: otus
+  labels:
+    app: mariadb
+spec:
+  clusterIP: None # Headless type
+  selector:
+    app: mariadb
+  ports:
+    - name: mariadb-port
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
