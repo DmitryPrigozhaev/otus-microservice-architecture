@@ -21,19 +21,16 @@ public class MariaDBConfig {
   public DataSource mysqlDataSource(Environment environment) {
     final String datasourceDriver = Objects.requireNonNull(environment.getProperty("datasource.driver"));
     final String datasourceUrl = environment.getProperty("datasource.url");
-    final String datasourceSchema = environment.getProperty("datasource.schema");
     final String datasourceUsername = environment.getProperty("datasource.username");
     final String datasourcePassword = environment.getProperty("datasource.password");
 
     log.info("datasourceDriver: {}", datasourceDriver);
     log.info("datasourceUrl: {}", datasourceUrl);
-    log.info("datasourceSchema: {}", datasourceSchema);
     log.info("datasourceUsername: {}", datasourceUsername);
     log.info("datasourcePassword: {}", datasourcePassword);
 
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-    dataSource.setSchema(datasourceSchema);
     dataSource.setDriverClassName(datasourceDriver);
     dataSource.setUrl(datasourceUrl);
     dataSource.setUsername(datasourceUsername);
