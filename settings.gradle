@@ -3,3 +3,5 @@
  */
 
 rootProject.name = 'otus-microservice-architecture'
+
+include 'lesson_1'
