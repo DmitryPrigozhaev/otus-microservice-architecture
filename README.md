@@ -1,2 +1,3 @@
-# otus-microservice-architecture
-Lesson repository for the Microservice Architecture course
+# Microservice Architecture
+
+Lesson repository for the Microservice Architecture course from OTUS.
