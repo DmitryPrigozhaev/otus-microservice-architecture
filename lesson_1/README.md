@@ -62,7 +62,7 @@ Docker image location: [Lesson 1](https://hub.docker.com/repository/docker/dmitr
    1. Get target image ID from "dmitryprigozhaev/lesson_1" images list:
 
       ```shell
-      docker images lesson_1 -q
+      docker images dmitryprigozhaev/lesson_1 -q
       ```
       
    2. Set tag for the target image version:
