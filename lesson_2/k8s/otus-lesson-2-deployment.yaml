@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lesson-2-deployment # The resource name
+  namespace: otus
+  labels:
+    app: lesson-2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lesson-2
+  template:
+    metadata:
+      labels:
+        app: lesson-2
+    spec:
+      containers:
+        - image: dmitryprigozhaev/lesson_2
+          imagePullPolicy: IfNotPresent
+          name: otus-lesson-2 # The container name
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          readinessProbe: # Check pod init
+            httpGet:
+              scheme: HTTP
+              path: /health
+              port: 8000
+              httpHeaders:
+                - name: Custom-Header
+                  value: OTUS
+            initialDelaySeconds: 5 # Timeout before first request
+            periodSeconds: 20      # Survey frequency
+          livenessProbe:           # Check pod status
+            httpGet:
+              scheme: HTTP
+              path: /health
+              port: 8000
+              httpHeaders:
+                - name: Custom-Header
+                  value: OTUS
+            initialDelaySeconds: 5 # Timeout before first request
+            periodSeconds: 20      # Survey frequency
