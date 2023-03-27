@@ -42,3 +42,33 @@ Basic Kubernetes entities: `Pod`, `ReplicaSet`, `Deployment`
 
 **Ingress** should have a rule that forwards all requests from **/otusapp/{student name}/*** to
 service with path rewrite, where **{student name}** is the name of the student.
+
+## Solution
+
+According to the task, the cluster consists of three entities:
+
+* **Deployment**
+* **Service**
+* **Ingress**
+
+Flow diagram:
+
+```mermaid
+  graph LR;
+      Client -. ingress-managed load balancer .-> Ingress;
+      subgraph Cluster;
+         Ingress -- rule: / -> / --> Service;
+         Ingress -- rule: /otusapp/dmitry/* -> /* --> Service;
+         Service --> Pod_1;
+         Service --> Pod_2;
+         Service --> Pod_3;
+      end;
+```
+
+Routing rules:
+
+1. The request to the root `/` does not change;
+2. Request prefixed with `/otusapp/dmitry/*` is rewritten in favor of `/*`;
+3. All other requests return 404.
+
+## Manual
