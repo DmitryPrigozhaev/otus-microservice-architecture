@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lesson-2-ingress
+  namespace: otus
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      rewrite ^/health/?$ /health break;
+      rewrite ^/otusapp/dmitry/(.+)$ /$1 break;
+      return 404;
+spec:
+  ingressClassName: nginx # kube v1.22+
+  rules:
+    - host: arch.homework
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: lesson-2-service
+                port:
+                  number: 8000
