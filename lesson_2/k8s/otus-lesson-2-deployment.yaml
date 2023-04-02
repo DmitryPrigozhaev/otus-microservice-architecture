@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - image: dmitryprigozhaev/lesson_2
-          imagePullPolicy: IfNotPresent
-          name: otus-lesson-2 # The container name
+          imagePullPolicy: Always # Always pull latest image
+          name: otus-lesson-2     # The container name
           ports:
             - containerPort: 8000
               protocol: TCP
