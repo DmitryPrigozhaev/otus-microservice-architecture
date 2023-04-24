@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb-sts
+  namespace: otus
+spec:
+  serviceName: mariadb-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template: # blueprint for pods
+    metadata:
+      labels:
+        app: mariadb # service will look for this label
+    spec: # specification for pods
+      containers: # we can have one or more containers
+        - name: mariadb
+          image: mariadb # latest
+          ports:
+            - containerPort: 3306
+              name: mariadb-port
+          env:
+            - name: MARIADB_ALLOW_EMPTY_ROOT_PASSWORD
+              value: "1" # if it is 1 and root_password is set, root_password takes precedence
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: ROOT_PASSWORD
+          volumeMounts:
+            - name: datadir
+              mountPath: /var/lib/mysql/
+  volumeClaimTemplates:
+    - metadata:
+        name: datadir
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 300M
