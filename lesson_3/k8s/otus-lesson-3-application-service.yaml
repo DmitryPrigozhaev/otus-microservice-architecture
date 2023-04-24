@@ -10,4 +10,4 @@ spec:
   ports:
     - protocol: TCP
       port: 8000 # Service port
-      targetPort: 8000 # Application port inside pod labeled 'homework-2'
+      targetPort: 8000 # Application port inside pod labeled 'lesson-3'

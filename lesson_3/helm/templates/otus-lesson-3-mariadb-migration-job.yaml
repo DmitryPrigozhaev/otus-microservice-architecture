@@ -1,0 +1,59 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-lesson-3-migration-job
+  namespace: {{ .Values.namespace }}
+spec:
+  template:
+    metadata:
+      name: {{ .Release.Name }}-lesson-3-migration-job
+      labels:
+        app: {{ .Release.Name }}-lesson-3-migration-job
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: check-mariadb-ready
+          image: mariadb
+          env:
+            - name: DATASOURCE_SERVICE
+              value: {{ .Release.Name }}-lesson3mariadb
+            - name: DATASOURCE_USER
+              value: {{ .Values.lesson3mariadb.auth.username }}
+            - name: DATASOURCE_PASSWORD
+              value: {{ .Values.lesson3mariadb.auth.password }}
+          command:
+            - sh
+            - "-c"
+            - |
+              until mysqladmin --user=$DATASOURCE_USER --password=$DATASOURCE_PASSWORD --host=$DATASOURCE_SERVICE ping;
+              do echo "Waiting for MariaDB Server..."; sleep 2; done
+      containers:
+        - name: primary-migration
+          image: mariadb # latest
+          env:
+            - name: DATASOURCE_SERVICE
+              value: {{ .Release.Name }}-lesson3mariadb
+            - name: DATASOURCE_USER
+              value: {{ .Values.lesson3mariadb.auth.username }}
+            - name: DATASOURCE_PASSWORD
+              value: {{ .Values.lesson3mariadb.auth.password }}
+          command:
+            - sh
+            - "-c"
+            - |
+              printf "Start migration Job\n"
+
+              mysql --user=$DATASOURCE_USER --password=$DATASOURCE_PASSWORD --host=$DATASOURCE_SERVICE << 'EOF'
+                USE lesson-3;
+                CREATE TABLE user (
+                  id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  username   VARCHAR(255),
+                  first_name VARCHAR(255),
+                  last_name  VARCHAR(255),
+                  email      VARCHAR(255),
+                  phone      VARCHAR(255)
+                );
+              EOF
+
+              printf "Migration complete, exit"
+  backoffLimit: 0
