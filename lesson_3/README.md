@@ -26,16 +26,37 @@ Basic Kubernetes entities: `Service`, `Ingress`
 
 +5 points for app templating in helm charts.
 
-## Solution
+# Solution
 
-TODO:
+According to the task, the cluster contains the basic entities: `Service` and `Ingress`
 
-## Guide
+The service consists of three pods of the simplest CRUD application with a common database.
+
+Flow diagram:
+
+```mermaid
+  graph LR;
+      Client -. ingress-managed load balancer .-> Ingress;
+      subgraph Cluster;
+         Ingress --> Service;
+         Service --> Application_Pod_1;
+         Service --> Application_Pod_2;
+         Service --> Application_Pod_3;
+         Application_Pod_1 --> DB_Pod
+         Application_Pod_2 --> DB_Pod
+         Application_Pod_3 --> DB_Pod
+         Migration_Job     --> DB_Pod
+      end;
+```
+
+# Guide
 
 ### Preconditions
 
 1. Docker installed;
+
 2. Gradle installed;
+
 3. Kubectl installed:
 
    1. Install the `kubectl` in any way possible (if required). Linux Mint [example](https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-kubectl-%D0%B2-linux):
@@ -119,13 +140,7 @@ TODO:
    minikube tunnel & disown
    ```
 
-2. Download project to a pre-created directory:
-
-   ```shell
-   git clone https://github.com/DmitryPrigozhaev/otus-microservice-architecture.git .
-   ```
-
-3. Install the nginx ingress controller via `helm`:
+2. Install the nginx ingress controller via `helm`:
 
    ```shell
    # otus-lesson-3-nginx-ingress.yaml is available in the project
@@ -136,6 +151,53 @@ TODO:
      -f otus-microservice-architecture/lesson_3/helm/ingress/otus-lesson-3-nginx-ingress.yaml
    ```
 
+3. Create namespace:
+
+   ```shell
+   kubectl create namespace otus
+   ```
+
 4. Run application via helm:
 
-   1. 
+   1. Update dependencies, in particular, load the database image for the chart:
+   
+      ```shell
+      helm dependency update otus-microservice-architecture/lesson_3/helm
+      ```
+
+   2. Examine a chart for possible issues:
+
+      ```shell
+      helm lint otus-microservice-architecture/lesson_3/helm
+      ```
+      
+   3. Install the chart:
+
+      ```shell
+      helm install lesson_3 otus-microservice-architecture/lesson_3/helm
+      ```
+
+5. Deal with it!
+
+   ```shell
+   curl arch.homework/health
+   ```
+   
+### Cleanup Lesson 3
+
+1. Cleanup cluster:
+
+   ```shell
+   helm delete lesson_3
+   ```
+2. Clear namespaces:
+
+   ```shell
+   kubectl delete --all namespace m otus
+   ```
+
+3. Clear the minikube:
+
+   ```shell
+   minikube delete --all --purge 
+   ```
