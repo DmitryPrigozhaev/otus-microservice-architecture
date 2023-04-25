@@ -176,3 +176,45 @@ TODO
         ```
 
 See more: https://www.jaegertracing.io/docs/1.24/operator/
+
+5. Deploy [Prometheus](https://prometheus.io/):
+
+    1. Add a repository to helm:
+
+        ```shell
+        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+        helm repo add stable https://charts.helm.sh/stable
+        helm repo update
+        ```
+
+    2. Deploy a monitoring solution based on Prometheus:
+
+        ```shell
+        helm install --version "13.7.2" -n \
+            monitoring -f prometheus/operator-values.yaml \
+            prometheus prometheus-community/kube-prometheus-stack
+        ```
+
+    3. Check the status of monitoring components:
+
+        ```shell
+        kubectl get pods -n monitoring
+        ```
+
+    4. Add a NodePort type service for direct access to Prometheus and Grafana:
+
+        ```shell
+        kubectl apply -f prometheus/monitoring-nodeport.yaml
+        ```
+
+    5. Open the Grafana web interface:
+
+        ```shell
+        minikube service -n monitoring prometheus-grafana-nodeport
+        ```
+
+    6. Open the Prometheus web interface:
+
+        ```shell
+        minikube service -n monitoring prom-prometheus-nodeport
+        ```
