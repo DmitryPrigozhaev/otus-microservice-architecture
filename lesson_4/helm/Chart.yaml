@@ -1,0 +1,16 @@
+apiVersion : v2                               # The chart API version
+name       : lesson-4                         # The name of the chart
+description: Simple CRUD RESTfull application # A single-sentence description of this project (optional)
+type       : application                      # It is the type of chart (optional): application or library
+version    : 0.1.0                            # The Helm Chart version
+appVersion : "1.0.0"                          # The deployed application version
+
+maintainers:
+  - name: Dmitry Prigozhaev
+
+# Details: https://github.com/bitnami/charts/tree/main/bitnami/mariadb
+dependencies:
+  - name: mariadb
+    alias: lesson4mariadb
+    version: ~11
+    repository: https://charts.bitnami.com/bitnami
