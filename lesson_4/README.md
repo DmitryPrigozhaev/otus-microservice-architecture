@@ -29,22 +29,15 @@ TODO
 
 2. Gradle installed;
 
-3. Kubectl installed:
+3. Kubectl v1.19.0 installed:
 
-    1. Install the `kubectl` in any way possible (if required). Linux
-       Mint [example](https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-kubectl-%D0%B2-linux):
+    1. Install the `kubectl` in any way possible (if required). Linux Mint via `snap`:
 
        ```shell
-       # download latest version
-       curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+       # download specific version:
+       sudo snap install kubectl --channel=1.19/stable --classic
        
-       # make binary executable
-       chmod +x ./kubectl
-       
-       # move the binary to the directory from the PATH environment variable
-       sudo mv ./kubectl /usr/local/bin/kubectl
-       
-       # make sure the latest version is installed
+       # make sure the specific version is installed:
        kubectl version --client
        ```
 
