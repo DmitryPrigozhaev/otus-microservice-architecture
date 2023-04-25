@@ -218,3 +218,30 @@ See more: https://www.jaegertracing.io/docs/1.24/operator/
         ```shell
         minikube service -n monitoring prom-prometheus-nodeport
         ```
+
+6. Deploy [Istio](https://istio.io/):
+
+    1. Install Istio unwrapping statement:
+
+        ```shell
+        istioctl operator init --watchedNamespaces istio-system --operatorNamespace istio-operator
+        ```
+       
+    2. Deploy Istio using the operator:
+
+        ```shell
+        kubectl apply -f istio/istio.yaml
+        ```
+       
+    3. Check Istio:
+
+        ```shell
+        kubectl get all -n istio-system -l istio.io/rev=default
+        ```
+        ```
+       
+    4. Set default settings:
+
+        ```shell
+        kubectl get all -n istio-system -l istio.io/rev=default
+        ```
