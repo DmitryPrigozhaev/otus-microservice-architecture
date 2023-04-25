@@ -229,22 +229,56 @@ See more: https://www.jaegertracing.io/docs/1.24/operator/
         ```shell
         istioctl operator init --watchedNamespaces istio-system --operatorNamespace istio-operator
         ```
-       
+
     2. Deploy Istio using the operator:
 
         ```shell
         kubectl apply -f istio/istio.yaml
         ```
-       
+
     3. Check Istio:
 
         ```shell
         kubectl get all -n istio-system -l istio.io/rev=default
         ```
-        ```
-       
+
     4. Set default settings:
 
         ```shell
         kubectl get all -n istio-system -l istio.io/rev=default
+        ```
+
+7. Deploy [Kiali](https://kiali.io/):
+
+    1. Add a repository to helm:
+
+        ```shell
+        helm repo add kiali https://kiali.org/helm-charts
+        helm repo update
+        ```
+
+    2. Install Kiali Operator deploying Kiali:
+
+        ```shell
+        helm install --version "1.33.1" -n kiali-operator \
+            -f kiali/operator-values.yaml \
+            kiali-operator kiali/kiali-operator
+        ```
+
+    3. Deploy Kiali:
+
+        ```shell
+        kubectl apply -f kiali/kiali.yaml
+        ```
+
+    4. Check Kiali:
+
+        ```shell
+        kubectl get pods -n=kiali -l app.kubernetes.io/name=kiali
+        ```
+
+    5. Open the Kiali web interface:
+
+        ```shell
+        minikube service -n kiali kiali-nodeport
         ```
