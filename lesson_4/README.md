@@ -57,13 +57,13 @@ TODO
        minikube status
        ```
 
-5. Helm installed:
+5. Helm v3.3.4 installed:
 
     1. Install the `helm` in any way possible (if required). Linux Mint example via `snap`:
 
        ```shell
        # install helm
-       snap install helm --classic
+       snap install helm --channel=3.3/stable --classic
        
        # check helm version
        helm versoin
