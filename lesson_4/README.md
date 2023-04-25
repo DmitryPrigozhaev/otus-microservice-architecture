@@ -137,7 +137,7 @@ TODO
     kubectl create namespace otus
    
     # create operators namespaces:
-    kubectl apply -f otus-microservice-architecture/lesson_4/istio/namespaces.yaml
+    kubectl apply -f otus-microservice-architecture/lesson_4/namespaces.yaml
     ```
 
 4. Deploy [Jaeger](https://www.jaegertracing.io/):
