@@ -136,9 +136,6 @@ TODO
 3. Create namespaces:
 
     ```shell
-    # create the 'otus' namespace:
-    kubectl create namespace otus
-   
     # create operators namespaces:
     kubectl apply -f otus-microservice-architecture/lesson_4/namespaces.yaml
     ```
@@ -281,4 +278,30 @@ See more: https://www.jaegertracing.io/docs/1.24/operator/
 
         ```shell
         minikube service -n kiali kiali-nodeport
+        ```
+
+8. Run application via helm:
+
+    1. Update dependencies, in particular, load the database image for the chart:
+
+        ```shell
+        helm dependency update otus-microservice-architecture/lesson_4/helm
+        ```
+
+    2. Examine a chart for possible issues:
+
+        ```shell
+        helm lint otus-microservice-architecture/lesson_4/helm
+        ```
+       
+    3. Validate the helm template (required if kubernetes version is not compatible):
+
+        ```shell
+        helm template otus-microservice-architecture/lesson_4/helm --validate
+        ```
+
+    5. Install the chart:
+
+        ```shell
+        helm install lesson4 otus-microservice-architecture/lesson_4/helm
         ```

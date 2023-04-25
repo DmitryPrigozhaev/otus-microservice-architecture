@@ -11,3 +11,4 @@ spec:
     - protocol: TCP
       port: {{ .Values.service.port }} # Service port
       targetPort: {{ .Values.service.port }} # Application port inside pod labeled 'lesson-4'
+      name: "http"
