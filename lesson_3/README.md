@@ -174,7 +174,7 @@ Flow diagram:
    3. Install the chart:
 
       ```shell
-      helm install lesson_3 otus-microservice-architecture/lesson_3/helm
+      helm install lesson3 otus-microservice-architecture/lesson_3/helm
       ```
 
 5. Deal with it!
