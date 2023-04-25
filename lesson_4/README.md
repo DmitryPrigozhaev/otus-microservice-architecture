@@ -115,3 +115,71 @@ TODO
    ```shell
    docker push dmitryprigozhaev/lesson_4:latest
    ```
+
+### Run an Application in a Cluster
+
+1. Configure `minikube`:
+
+    ```shell
+    # start kubernetes in Docker with `minikube`
+    minikube start --driver=docker
+    minikube tunnel & disown
+    ```
+
+2. Install the nginx ingress controller via `helm`:
+
+    ```shell
+    # otus-lesson-4-nginx-ingress.yaml is available in the project
+    kubectl create namespace m && \ 
+        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx/ && \ 
+        helm repo update && \ 
+        helm install nginx ingress-nginx/ingress-nginx --namespace m \
+        -f otus-microservice-architecture/lesson_4/helm/ingress/otus-lesson-4-nginx-ingress.yaml
+    ```
+
+3. Create namespaces:
+
+    ```shell
+    # create the 'otus' namespace:
+    kubectl create namespace otus
+   
+    # create operators namespaces:
+    kubectl apply -f otus-microservice-architecture/lesson_4/istio/namespaces.yaml
+    ```
+
+4. Deploy [Jaeger](https://www.jaegertracing.io/):
+   
+    1. Add a repository to helm:
+    
+        ```shell
+        helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+        helm repo update
+        ```
+
+    2. Install operator that deploys Jaeger:
+
+        ```shell
+        helm install --version "2.19.0" -n \
+            jaeger-operator -f jaeger/operator-values.yaml \
+            jaeger-operator jaegertracing/jaeger-operator
+        ```
+       
+    3. Deploy Jaeger:
+
+        ```shell
+        kubectl apply -f jaeger/jaeger.yaml
+        ```
+       
+    4. Check Jaeger:
+
+        ```shell
+        kubectl get pod -n jaeger -l app.kubernetes.io/instance=jaeger
+        ```
+       
+    5. Open the Jaeger web interface:
+
+        ```shell
+        minikube service -n jaeger jaeger-query-nodeport
+        ```
+       
+See more: https://www.jaegertracing.io/docs/1.24/operator/
