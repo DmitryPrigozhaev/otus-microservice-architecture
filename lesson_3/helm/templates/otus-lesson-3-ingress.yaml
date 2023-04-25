@@ -5,6 +5,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-lesson-3-ingress
+  namespace: {{ .Values.namespace }}
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
