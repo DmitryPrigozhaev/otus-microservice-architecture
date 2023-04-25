@@ -114,8 +114,8 @@ TODO
 1. Configure `minikube`:
 
     ```shell
-    # start kubernetes in Docker with `minikube`
-    minikube start --driver=docker
+    # start kubernetes v1.19.0 in Docker with `minikube`:
+    minikube start --driver=docker --cpus=4 --memory=8g --cni=flannel --kubernetes-version="v1.19.0"
     minikube tunnel & disown
     ```
 
@@ -141,9 +141,9 @@ TODO
     ```
 
 4. Deploy [Jaeger](https://www.jaegertracing.io/):
-   
+
     1. Add a repository to helm:
-    
+
         ```shell
         helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
         helm repo update
@@ -156,23 +156,23 @@ TODO
             jaeger-operator -f jaeger/operator-values.yaml \
             jaeger-operator jaegertracing/jaeger-operator
         ```
-       
+
     3. Deploy Jaeger:
 
         ```shell
         kubectl apply -f jaeger/jaeger.yaml
         ```
-       
+
     4. Check Jaeger:
 
         ```shell
         kubectl get pod -n jaeger -l app.kubernetes.io/instance=jaeger
         ```
-       
+
     5. Open the Jaeger web interface:
 
         ```shell
         minikube service -n jaeger jaeger-query-nodeport
         ```
-       
+
 See more: https://www.jaegertracing.io/docs/1.24/operator/
