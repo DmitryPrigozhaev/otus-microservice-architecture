@@ -69,15 +69,18 @@ TODO
        helm versoin
        ```
 
-6. Istio installed:
+6. Istio v1.7.3 installed:
 
     1. Install the `istio` in any way possible (if required). Linux Mint example:
 
         ```shell
-        # download the latest release with the command:
-        curl -sL https://istio.io/downloadIstioctl | sh -
+        # download the specified release with the command:
+        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.7.3 TARGET_ARCH=x86_64 sh -
+       
+        # move istio to the hidden directory:
+        mv ~/istio-1.7.3 ~/.istioctl
 
-        # add the istioctl client to your path:
+        # add the istioctl client to path variable:
         export PATH=$HOME/.istioctl/bin:$PATH
         ```
 
