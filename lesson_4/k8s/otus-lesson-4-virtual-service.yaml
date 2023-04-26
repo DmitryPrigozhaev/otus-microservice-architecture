@@ -1,0 +1,21 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: lesson-4-virtual-service
+  namespace: otus
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - lesson-4-gateway
+  http:
+    - route:
+        - destination:
+            host: lesson-4-service
+            subset: v1
+          weight: 50
+        - destination:
+            host: lesson-4-service
+            subset: v2
+          weight: 50

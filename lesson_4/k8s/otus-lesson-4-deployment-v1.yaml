@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lesson-4-deployment-v1 # The resource name
+  namespace: otus
+  labels:
+    app: lesson-4
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lesson-4
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: lesson-4
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+        - image: dmitryprigozhaev/lesson_2
+          imagePullPolicy: Always # Always pull latest image
+          name: otus-lesson-4     # The container name
+          ports:
+            - name: web
+              containerPort: 8000
+              protocol: TCP
+          readinessProbe: # Check pod init
+            httpGet:
+              scheme: HTTP
+              path: /health
+              port: 8000
+              httpHeaders:
+                - name: Custom-Header
+                  value: OTUS
+            initialDelaySeconds: 5 # Timeout before first request
+            periodSeconds: 20      # Survey frequency
+          livenessProbe:           # Check pod status
+            httpGet:
+              scheme: HTTP
+              path: /health
+              port: 8000
+              httpHeaders:
+                - name: Custom-Header
+                  value: OTUS
+            initialDelaySeconds: 5 # Timeout before first request
+            periodSeconds: 20      # Survey frequency
