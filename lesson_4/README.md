@@ -153,14 +153,14 @@ TODO
 
         ```shell
         helm install --version "2.19.0" -n \
-            jaeger-operator -f jaeger/operator-values.yaml \
+            jaeger-operator -f otus-microservice-architecture/lesson_4/jaeger/operator-values.yaml \
             jaeger-operator jaegertracing/jaeger-operator
         ```
 
     3. Deploy Jaeger:
 
         ```shell
-        kubectl apply -f jaeger/jaeger.yaml
+        kubectl apply -f otus-microservice-architecture/lesson_4/jaeger/jaeger.yaml
         ```
 
     4. Check Jaeger:
@@ -191,7 +191,7 @@ See more: https://www.jaegertracing.io/docs/1.24/operator/
 
         ```shell
         helm install --version "13.7.2" -n \
-            monitoring -f prometheus/operator-values.yaml \
+            monitoring -f otus-microservice-architecture/lesson_4/prometheus/operator-values.yaml \
             prometheus prometheus-community/kube-prometheus-stack
         ```
 
@@ -204,7 +204,7 @@ See more: https://www.jaegertracing.io/docs/1.24/operator/
     4. Add a NodePort type service for direct access to Prometheus and Grafana:
 
         ```shell
-        kubectl apply -f prometheus/monitoring-nodeport.yaml
+        kubectl apply -f otus-microservice-architecture/lesson_4/prometheus/monitoring-nodeport.yaml
         ```
 
     5. Open the Grafana web interface:
@@ -230,7 +230,7 @@ See more: https://www.jaegertracing.io/docs/1.24/operator/
     2. Deploy Istio using the operator:
 
         ```shell
-        kubectl apply -f istio/istio.yaml
+        kubectl apply -f otus-microservice-architecture/lesson_4/istio/istio.yaml
         ```
 
     3. Check Istio:
@@ -258,14 +258,14 @@ See more: https://www.jaegertracing.io/docs/1.24/operator/
 
         ```shell
         helm install --version "1.33.1" -n kiali-operator \
-            -f kiali/operator-values.yaml \
+            -f otus-microservice-architecture/lesson_4/kiali/operator-values.yaml \
             kiali-operator kiali/kiali-operator
         ```
 
     3. Deploy Kiali:
 
         ```shell
-        kubectl apply -f kiali/kiali.yaml
+        kubectl apply -f otus-microservice-architecture/lesson_4/kiali/kiali.yaml
         ```
 
     4. Check Kiali:
