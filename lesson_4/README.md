@@ -175,7 +175,7 @@ TODO
         minikube service -n jaeger jaeger-query-nodeport
         ```
 
-See more: https://www.jaegertracing.io/docs/1.24/operator/
+    See more: https://www.jaegertracing.io/docs/1.24/operator/
 
 5. Deploy [Prometheus](https://prometheus.io/):
 
@@ -242,7 +242,7 @@ See more: https://www.jaegertracing.io/docs/1.24/operator/
     4. Set default settings:
 
         ```shell
-        kubectl get all -n istio-system -l istio.io/rev=default
+        kubectl apply -f otus-microservice-architecture/lesson_4/istio/disable-mtls.yaml
         ```
 
 7. Deploy [Kiali](https://kiali.io/):
@@ -293,7 +293,7 @@ See more: https://www.jaegertracing.io/docs/1.24/operator/
         ```shell
         helm lint otus-microservice-architecture/lesson_4/helm
         ```
-       
+
     3. Validate the helm template (required if kubernetes version is not compatible):
 
         ```shell
