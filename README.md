@@ -8,13 +8,13 @@ Lesson repository for the Microservice Architecture course from OTUS.
 
 * `bash`
 
-    ```shell
-    # Set up autocompletion in the current bash session, the bash-completion package must first be installed:
-    source <(kubectl completion bash)
+   ```shell
+   # Set up autocompletion in the current bash session, the bash-completion package must first be installed:
+   source <(kubectl completion bash)
 
-    # Add autocomplete permanently to the bash shell:
-    echo "source <(kubectl completion bash)" >> ~/.bashrc
-    ```
+   # Add autocomplete permanently to the bash shell:
+   echo "source <(kubectl completion bash)" >> ~/.bashrc
+   ```
 
 * `zsh`
 
@@ -26,7 +26,7 @@ Lesson repository for the Microservice Architecture course from OTUS.
     echo "[[ $commands[kubectl] ]] && source <(kubectl completion zsh)" >> ~/.zshrc
     ```
 
-See more: https://kubernetes.io/ru/docs/reference/kubectl/cheatsheet/
+  See more: https://kubernetes.io/ru/docs/reference/kubectl/cheatsheet/
 
 2. Automatic input completion for `istioctl`:
 
@@ -40,29 +40,35 @@ See more: https://kubernetes.io/ru/docs/reference/kubectl/cheatsheet/
     # Add autocomplete permanently to the zsh shell:
     echo "source ~/.istioctl/_istioctl" >> ~/.zshrc
     ```
-
-See more: https://istio.io/latest/docs/ops/diagnostic-tools/istioctl/#istioctl-auto-completion
+   
+    See more: https://istio.io/latest/docs/ops/diagnostic-tools/istioctl/#istioctl-auto-completion
 
 3. Use `minikube` dashboards for system monitoring:
 
-   ```shell
-   minikube dashboard & disown
-   ```
+    ```shell
+    minikube dashboard & disown
+    ```
 
 4. To switch the context, run the command:
 
-   ```shell
-   kubectl config use-context minikube
-   ```
+    ```shell
+    kubectl config use-context minikube
+    ```
 
 5. Use `otus` namespace by default:
 
-   ```shell
-   kubectl config set-context --current --namespace=otus
-   ```
+    ```shell
+    kubectl config set-context --current --namespace=otus
+    ```
 
 6. Connecting to the database terminal:
 
-   ```shell
-   kubectl exec -it ["database pod name"] -- mysql --user=application_user --password=application_password
-   ```
+    ```shell
+    kubectl exec -it ["database pod name"] -- mysql --user=application_user --password=application_password
+    ```
+
+7. Cleanup `minikube`:
+
+    ```shell
+    minikube delete --all --purge
+    ```

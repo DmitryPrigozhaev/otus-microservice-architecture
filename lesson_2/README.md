@@ -197,7 +197,4 @@ Routing rules:
    ```shell
    # clear namespaces
    kubectl delete --all namespace m otus
-   
-   # clear minikube
-   minikube delete --all --purge 
    ```
