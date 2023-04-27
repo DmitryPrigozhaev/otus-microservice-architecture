@@ -23,7 +23,7 @@ spec:
         prometheus.io/port: "8080"
     spec:
       containers:
-        - image: dmitryprigozhaev/lesson_2
+        - image: dmitryprigozhaev/lesson_4
           imagePullPolicy: Always    # Always pull the latest image
           name: lesson-4-application # The container name
           ports:
