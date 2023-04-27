@@ -22,3 +22,10 @@ metadata:
   labels:
     istio-injection: disabled
 
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: otus
+  labels:
+    istio-injection: enabled # Enable Istio sidecar injection for namespace
