@@ -227,6 +227,16 @@ TODO
         ```shell
         kubectl get all -n istio-system -l istio.io/rev=default
         ```
+       
+        **Attention!**
+
+       At this point, there may be a problem with assigning an external IP
+       for the `istio-ingressgateway` service. For a `minikube`, the next
+       command can help:
+
+        ```shell
+        minikube tunnel
+        ```
 
     4. Set default settings:
 
