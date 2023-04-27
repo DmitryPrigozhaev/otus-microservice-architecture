@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: lesson-4-migration-job # The resource name
+  namespace: otus
+spec:
+  template: # blueprint for pods
+    metadata:
+      name: migration-job
+      labels:
+        app: migration-job
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: primary-migration
+          image: mariadb # latest
+          env:
+            - name: DATASOURCE_URL
+              value: mariadb-service
+            - name: DATASOURCE_USER
+              value: root
+            - name: DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: ROOT_PASSWORD
+          command:
+            - sh
+            - "-c"
+            - |
+              mysql -u$DATASOURCE_USER -p$DATASOURCE_PASSWORD -h$DATASOURCE_URL <<'EOF'
+                CREATE DATABASE lesson-4;
+                USE lesson-4;
+                CREATE TABLE `user` (
+                  `id`         BIGINT AUTO_INCREMENT PRIMARY KEY,
+                  `username`   VARCHAR(255),
+                  `first_name` VARCHAR(255),
+                  `last_name`  VARCHAR(255),
+                  `email`      VARCHAR(255),
+                  `phone`      VARCHAR(255)
+                );
+              EOF
+  backoffLimit: 0

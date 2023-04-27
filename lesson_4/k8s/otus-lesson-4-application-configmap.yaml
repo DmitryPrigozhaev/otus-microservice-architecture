@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: application-configmap
+data:
+  application.name: "OTUS Lesson 4 Application"
+  server.port: "8000"
+  datasource.user: "root"
+  datasource.password: "root"
+  datasource.url: jdbc:mysql://mariadb-service/lesson-4
+  datasource.driver: "org.mariadb.jdbc.Driver"
+  hibernate.dialect: "org.hibernate.dialect.MariaDB53Dialect"
