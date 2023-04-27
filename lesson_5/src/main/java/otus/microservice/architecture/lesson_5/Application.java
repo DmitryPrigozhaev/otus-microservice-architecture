@@ -1,10 +1,10 @@
-package otus.microservice.architecture.lesson_4;
+package otus.microservice.architecture.lesson_5;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * OTUS Microservice Architecture: Lesson 4.
+ * OTUS Microservice Architecture: Lesson 5.
  *
  * @author Dmitry Prigozhaev
  * on 17.07.2022

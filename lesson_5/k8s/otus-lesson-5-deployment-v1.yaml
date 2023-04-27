@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lesson-4-deployment-v1 # The resource name
+  name: lesson-5-deployment-v1 # The resource name
   namespace: otus
   labels:
-    app: lesson-4
+    app: lesson-5
     version: v1
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: lesson-4
+      app: lesson-5
       version: v1
   template:
     metadata:
       labels:
-        app: lesson-4
+        app: lesson-5
         version: v1
       annotations:
         prometheus.io/scrape: "true"
@@ -23,9 +23,9 @@ spec:
         prometheus.io/port: "8080"
     spec:
       containers:
-        - image: dmitryprigozhaev/lesson_4
+        - image: dmitryprigozhaev/lesson_5
           imagePullPolicy: Always    # Always pull the latest image
-          name: lesson-4-application # The container name
+          name: lesson-5-application # The container name
           ports:
             - name: web
               containerPort: 8000
