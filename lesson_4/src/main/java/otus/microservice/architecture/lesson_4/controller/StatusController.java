@@ -1,4 +1,4 @@
-package otus.microservice.architecture.lesson_4.api.controller;
+package otus.microservice.architecture.lesson_4.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * The simple REST Controller to get application status.
+ * The simple REST controller to get application status.
  *
  * @author Dmitry Prigozhaev
- * on 23.10.2022
+ * on 17.07.2022
  */
 @Slf4j
 @RestController
