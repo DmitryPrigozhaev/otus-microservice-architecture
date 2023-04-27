@@ -122,25 +122,14 @@ TODO
     minikube tunnel & disown
     ```
 
-2. Install the nginx ingress controller via `helm`:
-
-    ```shell
-    # otus-lesson-4-nginx-ingress.yaml is available in the project
-    kubectl create namespace m && \ 
-        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx/ && \ 
-        helm repo update && \ 
-        helm install nginx ingress-nginx/ingress-nginx --namespace m \
-        -f otus-microservice-architecture/lesson_4/helm/ingress/otus-lesson-4-nginx-ingress.yaml
-    ```
-
-3. Create namespaces:
+2. Create namespaces:
 
     ```shell
     # create operators namespaces:
     kubectl apply -f otus-microservice-architecture/lesson_4/namespaces.yaml
     ```
 
-4. Deploy [Jaeger](https://www.jaegertracing.io/):
+3. Deploy [Jaeger](https://www.jaegertracing.io/):
 
     1. Add a repository to helm:
 
@@ -177,7 +166,7 @@ TODO
 
     See more: https://www.jaegertracing.io/docs/1.24/operator/
 
-5. Deploy [Prometheus](https://prometheus.io/):
+4. Deploy [Prometheus](https://prometheus.io/):
 
     1. Add a repository to helm:
 
@@ -219,7 +208,7 @@ TODO
         minikube service -n monitoring prom-prometheus-nodeport
         ```
 
-6. Deploy [Istio](https://istio.io/):
+5. Deploy [Istio](https://istio.io/):
 
     1. Install Istio unwrapping statement:
 
@@ -245,7 +234,7 @@ TODO
         kubectl apply -f otus-microservice-architecture/lesson_4/istio/disable-mtls.yaml
         ```
 
-7. Deploy [Kiali](https://kiali.io/):
+6. Deploy [Kiali](https://kiali.io/):
 
     1. Add a repository to helm:
 
@@ -280,7 +269,7 @@ TODO
         minikube service -n kiali kiali-nodeport
         ```
 
-8. Run application via helm:
+7. Run application via helm:
 
     1. Update dependencies, in particular, load the database image for the chart:
 
