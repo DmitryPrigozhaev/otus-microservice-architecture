@@ -279,6 +279,24 @@ TODO
         minikube service -n kiali kiali-nodeport
         ```
 
-7. Run application:
+7. Deploy application:
 
-TODO
+    1. Apply all manifests via `kubectl`:
+
+        ```shell
+        kubectl apply -f otus-microservice-architecture/lesson_4/k8s/
+        ```
+       
+    2. Check application health:
+
+        ```shell
+        curl $(minikube -n otus service lesson-4-service --url)/health
+        ```
+
+8. Launch traffic:
+
+    ```shell
+    watch -n 0.1 curl $(minikube -n otus service lesson-4-service --url)/health
+    ```
+   
+9. Deal with it: see the Kialy dashboard.
