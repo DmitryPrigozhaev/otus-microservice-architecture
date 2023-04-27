@@ -279,28 +279,6 @@ TODO
         minikube service -n kiali kiali-nodeport
         ```
 
-7. Run application via helm:
+7. Run application:
 
-    1. Update dependencies, in particular, load the database image for the chart:
-
-        ```shell
-        helm dependency update otus-microservice-architecture/lesson_4/helm
-        ```
-
-    2. Examine a chart for possible issues:
-
-        ```shell
-        helm lint otus-microservice-architecture/lesson_4/helm
-        ```
-
-    3. Validate the helm template (required if kubernetes version is not compatible):
-
-        ```shell
-        helm template otus-microservice-architecture/lesson_4/helm --validate
-        ```
-
-    5. Install the chart:
-
-        ```shell
-        helm install lesson4 otus-microservice-architecture/lesson_4/helm
-        ```
+TODO
