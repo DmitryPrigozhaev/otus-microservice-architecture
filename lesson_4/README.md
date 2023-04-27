@@ -19,7 +19,9 @@ Detailed description of the task: https://github.com/izhigalko/otus-homework-ist
 
 # Solution
 
-TODO
+The result of the lesson is a 50/50 traffic split between the two resources:
+
+![](solution.png)
 
 # Guide
 
