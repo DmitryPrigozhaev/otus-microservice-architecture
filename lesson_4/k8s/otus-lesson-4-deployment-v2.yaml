@@ -20,8 +20,8 @@ spec:
     spec:
       containers:
         - image: dmitryprigozhaev/lesson_2
-          imagePullPolicy: Always # Always pull latest image
-          name: otus-lesson-4     # The container name
+          imagePullPolicy: Always    # Always pull the latest image
+          name: lesson-4-application # The container name
           ports:
             - name: web
               containerPort: 8000
