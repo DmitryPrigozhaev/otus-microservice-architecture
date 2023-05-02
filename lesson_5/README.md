@@ -292,13 +292,13 @@ The result of the lesson is a 50/50 traffic split between the two resources:
     2. Check application health:
 
         ```shell
-        curl $(minikube -n otus service lesson-5-service --url)/health
+        curl $(kubectl get service/istio-ingressgateway -n istio-system -o json | jq -r '.status.loadBalancer.ingress[0].ip'):80/health
         ```
 
 8. Launch traffic:
 
     ```shell
-    watch -n 0.1 curl $(minikube -n otus service lesson-5-service --url)/health
+    watch -n 0.1 curl $(kubectl get service/istio-ingressgateway -n istio-system -o json | jq -r '.status.loadBalancer.ingress[0].ip'):80/health
     ```
    
 9. Deal with it: see the Kialy dashboard.
