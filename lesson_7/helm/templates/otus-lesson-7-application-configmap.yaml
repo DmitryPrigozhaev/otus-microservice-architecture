@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-lesson-7-application-configmap
+  namespace: {{ .Values.namespace }}
+  labels:
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: {{ .Release.Name }}-lesson-7-application-configmap
+data:
+  server.port        : "{{ .Values.service.port }}"
+  datasource.user    : "{{ .Values.lesson7mariadb.auth.username }}"
+  datasource.url     : jdbc:mysql://{{ .Release.Name }}-lesson7mariadb/{{ .Values.lesson7mariadb.auth.database }}
+  datasource.schema  : "{{ .Values.lesson7mariadb.auth.database }}"
+  datasource.driver  : "{{ .Values.lesson7mariadb.driver }}"
+  hibernate.dialect  : "{{ .Values.lesson7mariadb.dialect }}"

@@ -1,0 +1,37 @@
+# Default values for lesson 7.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: "otus"
+
+replicaCount: 1
+
+container:
+  image:
+    repository: dmitryprigozhaev/lesson_7
+    imagePullPolicy: Always # Always pull the latest image
+    tag: latest
+
+service:
+  name: lesson-7-application-service
+  port: 8000
+
+lesson7mariadb:
+  auth:
+    database: lesson-7
+    username: application_user
+    password: application_password
+  driver: org.mariadb.jdbc.Driver
+  dialect: org.hibernate.dialect.MariaDB53Dialect
+
+ingress:
+  enabled: true
+  hosts:
+    - host: arch.homework
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: [ ]
+
+autoscaling:
+  enabled: false
