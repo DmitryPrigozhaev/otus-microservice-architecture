@@ -12,3 +12,5 @@ include 'lesson_5'
 
 include 'lesson_6:profile-service'
 include 'lesson_6:auth-service'
+
+include 'lesson_7'
